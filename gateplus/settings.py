@@ -27,10 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['gateplus.dev']
 
-
 # Application definition
 
 SHARED_APPS = [
+    'rest_framework',
     'tenant_schemas',
     'estates',
     'authentication',
@@ -144,3 +144,16 @@ STATIC_URL = '/static/'
 # More Tenant Settings
 TENANT_MODEL = "estates.Estate"
 DEFAULT_FILE_STORAGE = 'tenant_schemas.storage.TenantFileSystemStorage'
+
+# for custom user
+# Configuration to use custom user model
+AUTH_USER_MODEL = 'authentication.User'
+
+# for django rest framework
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
