@@ -25,7 +25,7 @@ SECRET_KEY = 'cw0$)h6m0)yrnm8wcn%_esbjzy27e9^2y(z=io$m01z5q90q9#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['gateplus.dev']
+ALLOWED_HOSTS = ['127.0.0.1', 'gateplus.dev']
 
 # Application definition
 
