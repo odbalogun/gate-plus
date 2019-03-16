@@ -16,7 +16,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_owner = models.BooleanField('is owner', default=True)
     is_security = models.BooleanField('is security', default=False)
     is_resident = models.BooleanField('is resident', default=False)
-    estate = models.ForeignKey(Estate, on_delete=models.SET_NULL, related_name='staff', null=True)
+    estate = models.ForeignKey(Estate, on_delete=models.SET_NULL, related_name='people', null=True)
 
     objects = UserManager()
 
