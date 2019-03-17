@@ -9,25 +9,37 @@ User = get_user_model()
 class EstateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estate
-        fields = ('id', 'name')
+        fields = ('id', 'name', 'slug')
 
 
-class UserSerializer(serializers.ModelSerializer):
-    estate_id = serializers.PrimaryKeyRelatedField(many=False, read_only=True, queryset=Estate.objects.all())
-    estate = EstateSerializer(many=False, read_only=True)
+class SignupSerializer(serializers.ModelSerializer):
+    estate = EstateSerializer(many=False, required=True)
 
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'phone_number', 'email', 'password', 'estate', 'estate_id')
+        fields = ('id', 'first_name', 'last_name', 'phone', 'email', 'password', 'estate')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        user = User(**validated_data)
+        estate = validated_data.pop('estate')
 
+        # save estate
+        e = Estate.tenancy.create_estate(name=estate['name'], slug=estate['slug'])
+        e.save()
+
+        user = User(**validated_data)
         user.set_password(validated_data['password'])
+        user.estate = e
         user.save()
 
-        # create user token for rest authentication
-        # Token.objects.create(user=user)
         return user
+
+        # user = User(**validated_data)
+        #
+        # user.set_password(validated_data['password'])
+        # user.save()
+        #
+        # # create user token for rest authentication
+        # # Token.objects.create(user=user)
+        # return user
 

@@ -6,7 +6,7 @@ import core.views as views
 app_name = 'core'
 
 router = DefaultRouter()
-router.register('users', views.UserSerializer, base_name='users')
+router.register('users', views.UserViewSet, base_name='users')
 
 urlpatterns = []
 

@@ -10,6 +10,7 @@ class EstateManager(models.Manager):
         """
         Creates and saves an estate. Creates a new record in our multi-tenant system
         """
-        tenant = self.model(domain_url="{}.{}".format(slug, settings.BASE_APP_URL), schema_name=slug, name=name)
+        tenant = self.model(domain_url="{}.{}".format(slug, settings.BASE_APP_URL), schema_name=slug, name=name,
+                            slug=slug, **extra_fields)
         tenant.save(using=self._db)
         return tenant
