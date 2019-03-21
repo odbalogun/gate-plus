@@ -32,14 +32,7 @@ class SignupSerializer(serializers.ModelSerializer):
         user.estate = e
         user.save()
 
+        # create user token for rest authentication
+        Token.objects.create(user=user)
+
         return user
-
-        # user = User(**validated_data)
-        #
-        # user.set_password(validated_data['password'])
-        # user.save()
-        #
-        # # create user token for rest authentication
-        # # Token.objects.create(user=user)
-        # return user
-

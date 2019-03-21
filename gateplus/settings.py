@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'gateplus.dev']
 
 SHARED_APPS = [
     'rest_framework',
+    'rest_framework.authtoken',
     'tenant_schemas',
     'estates',
     'authentication',
@@ -150,6 +151,11 @@ AUTH_USER_MODEL = 'authentication.User'
 
 # for django rest framework
 REST_FRAMEWORK = {
+    # Use DRF's token authentication
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'authentication.token.ExpiringTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
@@ -159,3 +165,6 @@ REST_FRAMEWORK = {
 
 # to get site url
 BASE_APP_URL = 'gateplus.dev'
+
+# set token expiry (in hours)
+REST_FRAMEWORK_TOKEN_EXPIRE_HOURS = 24
