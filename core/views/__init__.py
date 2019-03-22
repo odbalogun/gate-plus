@@ -1,1 +1,1 @@
-from core.views.views_users import *
+from core.views.users import *
