@@ -33,6 +33,7 @@ SHARED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'tenant_schemas',
+    'safedelete',
     'estates',
     'authentication',
     'django.contrib.admin',
