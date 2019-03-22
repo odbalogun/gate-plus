@@ -8,7 +8,9 @@ app_name = 'core'
 router = DefaultRouter()
 router.register('users', views.UserViewSet, base_name='users')
 
-urlpatterns = []
+urlpatterns = [
+    path('users/login/', views.LoginView.as_view(), name="login"),
+]
 
 urlpatterns += router.urls
 
