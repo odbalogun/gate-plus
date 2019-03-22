@@ -7,6 +7,7 @@ app_name = 'core'
 
 router = DefaultRouter()
 router.register('users', views.UserViewSet, base_name='users')
+router.register('complaints', views.ComplaintViewSet, base_name='complaints')
 
 urlpatterns = [
     path('users/login/', views.LoginView.as_view(), name="login"),
