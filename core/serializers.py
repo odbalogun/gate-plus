@@ -9,7 +9,8 @@ User = get_user_model()
 class EstateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Estate
-        fields = ('id', 'name', 'slug')
+        fields = ('id', 'name', 'slug', 'domain_url')
+        extra_kwargs = {'domain_url': {'read_only': True}}
 
 
 class SignupSerializer(serializers.ModelSerializer):
@@ -36,3 +37,5 @@ class SignupSerializer(serializers.ModelSerializer):
         Token.objects.create(user=user)
 
         return user
+
+
