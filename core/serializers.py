@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 from estates.models import Estate
+from core.models import Complaints
 
 User = get_user_model()
 
@@ -39,3 +40,8 @@ class SignupSerializer(serializers.ModelSerializer):
         return user
 
 
+class ComplaintSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Complaints
+        fields = '__all__'
+        exclude = ('status', )
