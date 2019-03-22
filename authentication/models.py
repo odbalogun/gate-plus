@@ -28,6 +28,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = 'users'
         unique_together = ('phone', 'estate',)
 
+    @property
+    def role(self):
+        if self.is_owner:
+            return 'admin'
+        if self.is_security:
+            return 'security'
+        if self.is_resident:
+            return 'resident'
+
     def get_full_name(self):
         """
         Returns the first_name plus the last_name, with a space in between.
